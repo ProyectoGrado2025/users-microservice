@@ -1,0 +1,16 @@
+package es.daw2.microservice_user_v1.models.util;
+
+public enum RolePermission {
+    READ_ALL_RESERVATIONS,
+    READ_ONE_RESERVATION,
+    CREATE_ONE_RESERVATION,
+    UPDATE_ONE_RESERVATION,
+    DISABLE_ONE_RESERVATION,
+
+    CREATE_ONE_WORKER,
+    DELETE_ONE_WORKER,
+    DISABLE_ONE_WORKER,
+    UPDATE_ONE_WORKER,
+    GET_ONE_WORKER,
+    GET_ALL_WORKERS
+}
