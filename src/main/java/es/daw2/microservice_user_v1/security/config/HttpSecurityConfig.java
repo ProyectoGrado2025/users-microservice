@@ -83,6 +83,12 @@ public class HttpSecurityConfig {
          */
         authReqConfig.requestMatchers(HttpMethod.POST,"/admin/**")
                 .hasRole(Role.ADMINISTRATOR.name());
+        authReqConfig.requestMatchers(HttpMethod.GET,"/admin/**")
+                .hasRole(Role.ADMINISTRATOR.name());
+        authReqConfig.requestMatchers(HttpMethod.PUT,"/admin/**")
+                .hasRole(Role.ADMINISTRATOR.name());
+        authReqConfig.requestMatchers(HttpMethod.DELETE,"/admin/**")
+                .hasRole(Role.ADMINISTRATOR.name());
         /*
          * Autorización de endpoints para hacer Login (Públicos)
          */
