@@ -50,6 +50,16 @@ public class UsuarioControlador {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/getenabledemployees")
+    public ResponseEntity<Page<Usuario>> getEnabledEmployees(Pageable pageable) {
+        Page<Usuario> employeePage = userService.getEnabledEmployees(pageable);
+        if(employeePage.hasContent()){
+            return ResponseEntity.ok(employeePage);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
+
     @GetMapping("/getemployee/{id}")
     public ResponseEntity<Usuario> getEmployeeById(@PathVariable Long id) {
         Optional<Usuario> userContainer = userService.getEmployeeById(id);

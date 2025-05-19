@@ -12,6 +12,8 @@ public interface IFServicioUsuario {
 
     public abstract Page<Usuario> getAllEmployees(Pageable pageable);
 
+    public abstract Page<Usuario> getEnabledEmployees(Pageable pageable);
+
     public abstract Optional<Usuario> getEmployeeById(Long id);
 
     public abstract Usuario updateEmployeeById(Long id, SaveUser saveUser);

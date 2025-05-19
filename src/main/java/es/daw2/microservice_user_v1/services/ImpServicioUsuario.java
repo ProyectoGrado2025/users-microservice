@@ -89,4 +89,9 @@ public class ImpServicioUsuario implements IFServicioUsuario{
 
         return userRepository.save(userFromDb);
     }
+
+    @Override
+    public Page<Usuario> getEnabledEmployees(Pageable pageable) {
+        return userRepository.findAllByStatus(Usuario.UserStatus.ENABLED, pageable);
+    }
 }
