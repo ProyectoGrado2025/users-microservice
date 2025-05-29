@@ -42,6 +42,4 @@ public class AuthenticationController {
         authenticationService.logout(request);
         return ResponseEntity.ok(new LogoutResponse("Logout exitoso."));
     }
-    
-
 }
