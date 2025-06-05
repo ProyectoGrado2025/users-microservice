@@ -41,7 +41,7 @@ public class UsuarioControlador {
      * @param pageable
      * @return
      */
-    @GetMapping("/getemployees")
+    @GetMapping("/empleados/listar")
     public ResponseEntity<Page<Usuario>> getEmployees(Pageable pageable) {
         Page<Usuario> employeePage = userService.getAllEmployees(pageable);
         if(employeePage.hasContent()){
@@ -50,7 +50,7 @@ public class UsuarioControlador {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/getenabledemployees")
+    @GetMapping("/empleados/listar/activos")
     public ResponseEntity<Page<Usuario>> getEnabledEmployees(Pageable pageable) {
         Page<Usuario> employeePage = userService.getEnabledEmployees(pageable);
         if(employeePage.hasContent()){
@@ -60,7 +60,7 @@ public class UsuarioControlador {
     }
     
 
-    @GetMapping("/getemployee/{id}")
+    @GetMapping("/empleados/{id}/info")
     public ResponseEntity<Usuario> getEmployeeById(@PathVariable Long id) {
         Optional<Usuario> userContainer = userService.getEmployeeById(id);
         if(userContainer.isPresent()){
@@ -69,24 +69,23 @@ public class UsuarioControlador {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("updateemployee/{id}")
+    @PutMapping("/empleados/{id}/actualizar")
     public ResponseEntity<Usuario> updateEmployeeById(@PathVariable Long id, @RequestBody @Valid SaveUser saveUser) {
         Usuario user = userService.updateEmployeeById(id, saveUser);
 
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("updateemployee/{id}/disabled")
+    @PutMapping("/empleados/{id}/disabled")
     public ResponseEntity<Usuario> disableEmployeeById(@PathVariable Long id) {
         Usuario user = userService.disableEmployeeById(id);
 
         return ResponseEntity.ok(user);
     }
     
-    @PostMapping("/registeremployee")
+    @PostMapping("/empleados/registrar")
     public ResponseEntity<RegisteredUser> registerOne (@RequestBody @Valid SaveUser newUser) {
         RegisteredUser registeredUser = authService.registerOneEmployee(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
     }
-    
 }

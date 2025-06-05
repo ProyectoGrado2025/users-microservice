@@ -55,7 +55,7 @@ public class HttpSecurityConfig {
                 .exceptionHandling(exceptionConfig -> {
                     exceptionConfig.authenticationEntryPoint(authenticationEntryPoint);
                     exceptionConfig.accessDeniedHandler(accessDeniedHandler);
-                })
+                })  
                 .build();
     }
 
@@ -81,6 +81,7 @@ public class HttpSecurityConfig {
         /*
          * Autorización de endpoints para gestionar usuarios basado en Roles
          */
+        // authReqConfig.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
         authReqConfig.requestMatchers(HttpMethod.POST,"/admin/**")
                 .hasRole(Role.ADMINISTRATOR.name());
         authReqConfig.requestMatchers(HttpMethod.GET,"/admin/**")
