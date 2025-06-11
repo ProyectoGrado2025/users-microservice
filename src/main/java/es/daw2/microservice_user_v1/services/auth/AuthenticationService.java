@@ -1,5 +1,6 @@
 package es.daw2.microservice_user_v1.services.auth;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -86,12 +87,21 @@ public class AuthenticationService {
     public boolean validateToken(String jwt) {
         try{
             jwtService.extractEmail(jwt);
-            return true;
+            Optional<JwtToken> tokenOptional = jwtTokenRepositorio.findByToken(jwt);
+            if(tokenOptional.isEmpty()){
+                return false;
+            }
+
+            JwtToken token = tokenOptional.get();
+
+            if(token.isValid() && token.getExpiration().after(new Date())){
+                return true;
+            }
+            return false;
         } catch (Exception e){
             System.out.println(e.getMessage());
             return false;
         }
-
     }
 
     public void logout(HttpServletRequest request) {

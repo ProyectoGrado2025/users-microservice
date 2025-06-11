@@ -1,6 +1,7 @@
 package es.daw2.microservice_user_v1.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,11 @@ public class AuthenticationController {
     @GetMapping("/validate")
     public ResponseEntity<Boolean> validate(@RequestParam String jwt) {
         boolean isTokenValid = authenticationService.validateToken(jwt);
-        return ResponseEntity.ok(isTokenValid);
+        if(isTokenValid){
+            return ResponseEntity.ok(isTokenValid);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(isTokenValid);
+        }
     }
     
     @PostMapping("/login")
